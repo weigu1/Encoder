@@ -36,17 +36,19 @@
 // It must be defined before Encoder.h is included.
 //#define ENCODER_OPTIMIZE_INTERRUPTS
 
-#include <Encoder.h>
+#include <Encoder_Wemos.h>
 #include "pins_arduino.h"
 
 // Change these two numbers to the pins connected to your encoder
 // or shift register circuit which emulates a quadrature encoder
 //  case 1: both pins are interrupts
 //  case 2: only first pin used as interrupt
-Encoder myEnc(5, 6);
+const byte PIN_ENC_A = 14;  // D5 (SCK)
+const byte PIN_ENC_B = 12;  // D6 (MISO)
+Encoder myEnc(PIN_ENC_A, PIN_ENC_B);      // create encoder object
 
 // Connect a DC voltmeter to this pin.
-const int outputPin = 12;
+const int outputPin = 13; // D7 (MOSI)
 
 /* This simple circuit, using a Dual Flip-Flop chip, can emulate
    quadrature encoder signals.  The clock can come from a fancy
@@ -59,7 +61,7 @@ const int outputPin = 12;
  Clock                   |
  Input o----*--------------------------      ---------------------------o Output1
             |            |14           |    |
-            |     _______|_______      |    |     _______________ 
+            |     _______|_______      |    |     _______________
             |    |    CD4013     |     |    |    |    CD4013     |
             |  5 |               | 1   |    |  9 |               | 13
         ---------|  D         Q  |-----|----*----|  D         Q  |------o Output2

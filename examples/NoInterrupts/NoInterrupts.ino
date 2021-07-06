@@ -11,7 +11,7 @@
 // your program must call the read() function rapidly, or risk
 // missing changes in position.
 #define ENCODER_DO_NOT_USE_INTERRUPTS
-#include <Encoder.h>
+#include <Encoder_Wemos.h>
 
 // Beware of Serial.print() speed.  Without interrupts, if you
 // transmit too much data with Serial.print() it can slow your
@@ -23,11 +23,14 @@
 // Change these two numbers to the pins connected to your encoder.
 //   With ENCODER_DO_NOT_USE_INTERRUPTS, no interrupts are ever
 //   used, even if the pin has interrupt capability
-Encoder myEnc(5, 6);
+const byte PIN_ENC_A = 14;  // D5 (SCK)
+const byte PIN_ENC_B = 12;  // D6 (MISO)
+const byte PIN_ENC_PB = 13; // D7 (MOSI)
+Encoder myEnc(PIN_ENC_A, PIN_ENC_B);      // create encoder object
 //   avoid using pins with LEDs attached
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(115200);
   Serial.println("Basic NoInterrupts Test:");
 }
 
@@ -43,4 +46,5 @@ void loop() {
   // very slow motion.  You may uncomment this line to see
   // how badly a delay affects your encoder.
   //delay(50);
+  yield();
 }

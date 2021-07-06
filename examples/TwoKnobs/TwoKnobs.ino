@@ -4,7 +4,7 @@
  * This example code is in the public domain.
  */
 
-#include <Encoder.h>
+#include <Encoder_Wemos.h>
 
 // Change these pin numbers to the pins connected to your encoder.
 //   Best Performance: both pins have interrupt capability
@@ -15,7 +15,7 @@ Encoder knobRight(7, 8);
 //   avoid using pins with LEDs attached
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(115200);
   Serial.println("TwoKnobs Encoder Test:");
 }
 
